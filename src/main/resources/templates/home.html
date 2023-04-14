@@ -2,7 +2,7 @@
 <html
   lang="en"
   xmlns="http://www.thymeleaf.org"
-  th:replace="~{base::layout(~{::body})}"
+  th:replace="~{base::layout(~{::section})}"
 >
   <head>
     <meta charset="UTF-8" />
@@ -11,6 +11,15 @@
     <title th:text="${title}"></title>
   </head>
   <body>
-    <h1>Home Page</h1>
+    <section class="banner d-flex justify-content-center align-items-center">
+      <div class="text-center">
+        <h1 class="font-weight-bold">Smart Contact Manager</h1>
+        <p>
+          Start collecting your contacts in very smarter way. We provide very
+          effecient way of handling contacts.
+        </p>
+        <button class="btn bg-primary text-white">Get Start</button>
+      </div>
+    </section>
   </body>
 </html>
