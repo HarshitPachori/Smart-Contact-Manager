@@ -12,6 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "USER")
@@ -21,12 +24,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Size(min = 2, max = 20, message = "min 2 and max 20 characters are allowed...")
     private String name;
 
     @Column(unique = true)
+    @Email(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
+    @Size(min = 8, message = "password should be atleast 8 characters long...")
     private String password;
+
     private boolean enabled;
     private String role;
 

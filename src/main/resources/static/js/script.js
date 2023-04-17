@@ -6,5 +6,5 @@ if (alertMessage) {
   // set a timeout to hide the alert message after 3 seconds
   setTimeout(() => {
     alertMessage.style.display = "none";
-  }, 5000);
+  }, 3000);
 }

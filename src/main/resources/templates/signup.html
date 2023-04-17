@@ -51,10 +51,18 @@
                     id="name-field"
                     class="form-control"
                     placeholder="Enter your name"
-                    required
                     th:value="${user.name}"
+                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}"
                   />
+                  <!-- .............error container............. -->
+                  <div
+                    id="validationserver03Feedback"
+                    class="invalid-feedback rounded alert-danger p-1 shadow-lg"
+                    th:each="err : ${#fields.errors('name')}"
+                    th:text="${err}"
+                  ></div>
                 </div>
+
                 <!-- email field -->
                 <div class="mb-3">
                   <label for="" id="email-field" class="form-label"
@@ -66,9 +74,16 @@
                     id="email-field"
                     class="form-control"
                     placeholder="Enter your Email"
-                    required
                     th:value="${user.email}"
+                    th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}"
                   />
+                  <!-- .............error container............. -->
+                  <div
+                    id="validationserver03Feedback"
+                    class="invalid-feedback rounded alert-danger p-1 shadow-lg"
+                    th:each="err : ${#fields.errors('email')}"
+                    th:text="${err}"
+                  ></div>
                 </div>
                 <!-- password field -->
                 <div class="mb-3">
@@ -81,8 +96,15 @@
                     id="name-field"
                     class="form-control"
                     placeholder="Enter your Password"
-                    required
+                    th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}"
                   />
+                  <!-- .............error container............. -->
+                  <div
+                    id="validationserver03Feedback"
+                    class="invalid-feedback rounded alert-danger p-1 shadow-lg"
+                    th:each="err : ${#fields.errors('password')}"
+                    th:text="${err}"
+                  ></div>
                 </div>
                 <!-- about field -->
                 <div class="mb-3">
@@ -95,8 +117,16 @@
                     rows="6"
                     class="form-control"
                     placeholder="Enter something about yourself"
-                    th:value="${user.about}"
+                    th:text="${user.about}"
+                    th:classappend="${#fields.hasErrors('about') ? 'is-invalid' : ''}"
                   ></textarea>
+                  <!-- .............error container............. -->
+                  <div
+                    id="validationserver03Feedback"
+                    class="invalid-feedback rounded alert-danger p-1 shadow-lg"
+                    th:each="err : ${#fields.errors('about')}"
+                    th:text="${err}"
+                  ></div>
                 </div>
 
                 <!-- terms and conditions field -->

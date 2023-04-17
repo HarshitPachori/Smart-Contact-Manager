@@ -1,8 +1,13 @@
 package com.smartcontactmanager.controller;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +20,7 @@ import com.smartcontactmanager.helper.Message;
 import com.smartcontactmanager.models.User;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -52,11 +58,17 @@ public class HomeController {
     }
 
     @PostMapping("/do_register")
-    public String registerUser(@ModelAttribute("user") User user,
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult,
             @RequestParam(value = "agreement", defaultValue = "false") boolean agreement, Model model,
             HttpSession session) {
 
         try {
+            if (bindingResult.hasErrors()) {
+                System.out.println("error");
+                model.addAttribute("user", user);
+                System.out.println(user);
+                return "signup";
+            }
             if (!agreement) {
                 throw new Exception("You don't have agreed to the terms and conditions...");
             }
@@ -65,6 +77,7 @@ public class HomeController {
             if (existingUser != null) {
                 throw new Exception("Email already exists...");
             }
+
             user.setRole("ROLE_USER");
             user.setEnabled(true);
             user.setImageUrl("default.png");
@@ -73,23 +86,22 @@ public class HomeController {
 
             model.addAttribute("user", new User());
             session.setAttribute("message", new Message("successfully Registered", "alert-success"));
-            System.out.println(agreement);
-            System.out.println(user);
+            // System.out.println(agreement);
+            // System.out.println(user);
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(e.getMessage());
+            // System.out.println(e.getMessage());
             model.addAttribute("user", user);
             session.setAttribute("message", new Message(e.getMessage(), "alert-danger"));
-            return "redirect:/signup";
+            return "signup";
         }
         // Schedule a task to remove the message attribute after 5 seconds
-        // ScheduledExecutorService executor =
-        // Executors.newSingleThreadScheduledExecutor();
-        // executor.schedule(() -> session.removeAttribute("message"), 5,
-        // TimeUnit.SECONDS);
-        // executor.shutdown();
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.schedule(() -> session.removeAttribute("message"), 3,
+                TimeUnit.SECONDS);
+        executor.shutdown();
 
-        return "redirect:/signup";
+        return "signup";
     }
 }
