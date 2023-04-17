@@ -58,33 +58,37 @@ public class HomeController {
 
         try {
             if (!agreement) {
-                session.setAttribute("message",
-                        new Message("You don't have agreed to the terms and conditions...", "alert-danger"));
-                return "redirect:/signup";
+                throw new Exception("You don't have agreed to the terms and conditions...");
             }
             // Check if email already exists in database
             User existingUser = this.userRepo.findByEmail(user.getEmail());
             if (existingUser != null) {
-                session.setAttribute("message", new Message("Email already exists...", "alert-danger"));
-                return "redirect:/signup";
+                throw new Exception("Email already exists...");
             }
             user.setRole("ROLE_USER");
             user.setEnabled(true);
             user.setImageUrl("default.png");
 
-            User result = this.userRepo.save(user);
+            this.userRepo.save(user);
 
             model.addAttribute("user", new User());
             session.setAttribute("message", new Message("successfully Registered", "alert-success"));
             System.out.println(agreement);
             System.out.println(user);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             model.addAttribute("user", user);
-            session.setAttribute("message", new Message("Something Went Wrong !! " + e.getMessage(), "alert-danger"));
-            return "signup";
+            session.setAttribute("message", new Message(e.getMessage(), "alert-danger"));
+            return "redirect:/signup";
         }
+        // Schedule a task to remove the message attribute after 5 seconds
+        // ScheduledExecutorService executor =
+        // Executors.newSingleThreadScheduledExecutor();
+        // executor.schedule(() -> session.removeAttribute("message"), 5,
+        // TimeUnit.SECONDS);
+        // executor.shutdown();
 
         return "redirect:/signup";
     }

@@ -31,6 +31,7 @@
                 th:if="${session.message}"
                 th:classappend="${session.message.type}"
                 role="alert"
+                id="alert-message"
               >
                 <p class="text-center" th:text="${session.message.content}"></p>
               </div>
