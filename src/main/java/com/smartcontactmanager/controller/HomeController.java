@@ -5,6 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,9 @@ public class HomeController {
     // for database
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/test")
     @ResponseBody
@@ -72,6 +76,9 @@ public class HomeController {
             if (!agreement) {
                 throw new Exception("You don't have agreed to the terms and conditions...");
             }
+            // encrypting the password
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+
             // Check if email already exists in database
             User existingUser = this.userRepo.findByEmail(user.getEmail());
             if (existingUser != null) {
