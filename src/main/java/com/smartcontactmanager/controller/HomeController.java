@@ -85,7 +85,7 @@ public class HomeController {
                 throw new Exception("Email already exists...");
             }
 
-            user.setRole("ROLE_USER");
+            user.setRole("USER");
             user.setEnabled(true);
             user.setImageUrl("default.png");
 
