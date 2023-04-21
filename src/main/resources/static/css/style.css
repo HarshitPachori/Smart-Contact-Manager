@@ -17,3 +17,7 @@ body {
   padding: 20px;
   background-color: #05386b;
 }
+
+.link:hover {
+  text-decoration: underline !important;
+}

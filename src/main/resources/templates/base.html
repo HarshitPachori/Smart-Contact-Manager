@@ -24,7 +24,9 @@
     <!-- ...........navbar starts..................... -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Smart Contact Manager</a>
+        <a class="navbar-brand" th:href="@{/}" href="/"
+          >Smart Contact Manager</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -51,7 +53,12 @@
               <a class="nav-link" th:href="@{/about}" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
+              <a
+                class="nav-link"
+                th:href="@{/user/dashboard}"
+                href="#"
+                tabindex="-1"
+                aria-disabled="true"
                 >Login</a
               >
             </li>

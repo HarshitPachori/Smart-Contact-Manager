@@ -85,7 +85,7 @@ public class HomeController {
                 throw new Exception("Email already exists...");
             }
 
-            user.setRole("USER");
+            user.setRole("ROLE_USER");
             user.setEnabled(true);
             user.setImageUrl("default.png");
 
@@ -110,5 +110,11 @@ public class HomeController {
         executor.shutdown();
 
         return "signup";
+    }
+
+    @GetMapping("/signin")
+    public String customLogin(Model model) {
+        model.addAttribute("title", "Login - Smart Contact Manager");
+        return "login";
     }
 }
