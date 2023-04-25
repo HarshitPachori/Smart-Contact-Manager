@@ -44,10 +44,10 @@ public class MyConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN").requestMatchers("/user/**")
-                .hasRole("USER").requestMatchers("/**").permitAll().and().formLogin().loginPage("/signin").and().csrf()
+                .hasRole("USER").requestMatchers("/**").permitAll().and().formLogin().loginPage("/signin")
+                .loginProcessingUrl("/doLogin").defaultSuccessUrl("/user/dashboard").and()
+                .csrf()
                 .disable();
-
         return http.build();
     }
-
 }

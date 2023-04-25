@@ -50,26 +50,18 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/about}" href="#">About</a>
+              <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
+                ><span th:text="${user.name}"></span
+              ></a>
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                th:href="@{/signin}"
+                th:href="@{/logout}"
                 href="#"
                 tabindex="-1"
                 aria-disabled="true"
-                >Login</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                th:href="@{/signup}"
-                href="#"
-                tabindex="-1"
-                aria-disabled="true"
-                >Signup</a
+                >Logout</a
               >
             </li>
           </ul>
