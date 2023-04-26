@@ -47,7 +47,7 @@
                 <!-- email field -->
                 <div class="mb-3">
                   <label for="" id="email-field" class="form-label"
-                    >Email</label
+                    ><i class="fas fa-envelope"></i> Email</label
                   >
                   <input
                     name="username"
@@ -60,7 +60,7 @@
                 <!-- password field -->
                 <div class="mb-3">
                   <label for="" id="password-field" class="form-label"
-                    >Password</label
+                    ><i class="fas fa-lock"></i> Password</label
                   >
                   <input
                     name="password"
@@ -70,21 +70,9 @@
                     placeholder="Enter your Password"
                   />
                 </div>
-                <!-- terms and conditions field -->
                 <div
-                  class="mb-3 form-check d-flex align-items-center justify-content-between"
+                  class="container d-flex align-items-center justify-content-end"
                 >
-                  <div>
-                    <input
-                      name="agreement"
-                      type="checkbox"
-                      class="form-check-input"
-                      id="agreement"
-                    />
-                    <label for="agreement" id="agreement" class="form-label"
-                      >Remember me</label
-                    >
-                  </div>
                   <a
                     class="link form-label text-white text-decoration-none"
                     th:href="@{/signup}"

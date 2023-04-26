@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.thymeleaf.org"
+  th:replace="~{normal/base::layout(~{::body})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${title}"></title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="my-card rounded-3 shadow text-white">
+              <h2 class="text-center">Add Contact</h2>
+              <form
+                action=""
+                th:action="@{/user/process-contact}"
+                th:object="${contact}"
+                enctype="multipart/form-data"
+                method="post"
+              >
+                <!-- first name field -->
+                <div class="mb-3">
+                  <label for="" id="firstName" class="form-label"
+                    ><i class="fas fa-user-alt"></i> First Name</label
+                  >
+                  <input
+                    name="name"
+                    type="text"
+                    id="firstName"
+                    class="form-control"
+                    placeholder="Enter Your First Name"
+                  />
+                </div>
+
+                <!-- second name field -->
+                <div class="mb-3">
+                  <label for="" id="secondName" class="form-label"
+                    ><i class="fas fa-user-alt"></i> Last Name</label
+                  >
+                  <input
+                    name="secondName"
+                    type="text"
+                    id="secondName"
+                    class="form-control"
+                    placeholder="Enter Your Second Name"
+                  />
+                </div>
+
+                <!-- phone field -->
+                <div class="mb-3">
+                  <label for="" id="phone" class="form-label"
+                    ><i class="fas fa-phone"></i> Phone</label
+                  >
+                  <input
+                    name="phone"
+                    type="number"
+                    id="phone"
+                    class="form-control"
+                    placeholder="Enter Your Phone Number"
+                  />
+                </div>
+
+                <!-- email field -->
+                <div class="mb-3">
+                  <label for="" id="email" class="form-label"
+                    ><i class="fas fa-envelope"></i> Email</label
+                  >
+                  <input
+                    name="email"
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="Enter Your Email"
+                  />
+                </div>
+
+                <!-- work field -->
+                <div class="mb-3">
+                  <label for="" id="work" class="form-label"
+                    ><i class="fas fa-briefcase"></i> Work</label
+                  >
+                  <input
+                    name="work"
+                    type="text"
+                    id="work"
+                    class="form-control"
+                    placeholder="Enter Your Work"
+                  />
+                </div>
+
+                <!-- description field -->
+                <div class="mb-3">
+                  <label for="" id="description" class="form-label"
+                    ><i class="fas fa-pencil"></i> Description</label
+                  >
+                  <textarea
+                    name="description"
+                    id="description"
+                    rows="5"
+                    class="form-control"
+                    placeholder="Enter Your Contact Description"
+                  ></textarea>
+                </div>
+
+                <!-- image field -->
+                <div class="mb-3">
+                  <label for="" id="profileImage" class="form-label"
+                    ><i class="fas fa-camera"></i> Profile</label
+                  >
+                  <input
+                    name="profileImage"
+                    type="file"
+                    id="profileImage"
+                    class="form-control"
+                    placeholder="Upload Profile"
+                  />
+                </div>
+
+                <div class="container text-center">
+                  <button
+                    type="submit"
+                    class="btn btn-danger text-white shadow"
+                  >
+                    Save Contact
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

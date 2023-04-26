@@ -17,7 +17,7 @@ public class Contact {
     private int cId;
 
     private String name;
-    private String nickName;
+    private String secondName;
     private String work;
     private String email;
     private String imageUrl;
@@ -32,6 +32,14 @@ public class Contact {
     private User user;
 
     // ............Getters And Setters....................
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public int getCid() {
         return cId;
@@ -49,12 +57,12 @@ public class Contact {
         this.name = name;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getsecondName() {
+        return secondName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setsecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getWork() {

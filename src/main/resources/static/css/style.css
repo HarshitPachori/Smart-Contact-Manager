@@ -21,3 +21,65 @@ body {
 .link:hover {
   text-decoration: underline !important;
 }
+
+/* sidebar */
+.sidebar {
+  width: 18%;
+  background: #05386b;
+  height: 100vh;
+  position: fixed;
+  padding-top: 45px;
+}
+.sidebar a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 10px 25px;
+  color: #e2e2e2;
+}
+.sidebar a:hover {
+  background-color: #e2e2e2;
+  color: #05386b;
+}
+.sidebar .divider {
+  height: 0.1px;
+  width: 100%;
+  background: #e2e2e2;
+  margin-top: 10px;
+}
+.sidebar .crossBtn {
+  position: absolute;
+  top: 0;
+  right: 35px;
+  font-size: 36px;
+  text-align: right;
+  cursor: pointer;
+  color: #e2e2e2;
+  display: none;
+}
+
+/* content */
+.content {
+  margin-left: 20%;
+}
+.content .menu {
+  padding: 5px;
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    display: none;
+    width: 80% !important;
+    background: #05386b;
+    height: 100vh;
+    position: fixed;
+    padding-top: 30px;
+  }
+  .sidebar .crossBtn {
+    display: block;
+  }
+  .content {
+    margin-left: 0% !important;
+  }
+}
