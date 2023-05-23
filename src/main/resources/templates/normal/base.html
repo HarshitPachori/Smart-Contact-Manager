@@ -49,8 +49,8 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
             <li class="nav-item">
               <a class="nav-link" href="#" tabindex="-1" aria-disabled="true"
-                ><i class="fas fa-user-circle"></i
-                > <span th:text="${user.name}"></span
+                ><i class="fas fa-user-circle"></i>
+                <span th:text="${user.name}"></span
               ></a>
             </li>
             <li class="nav-item">
@@ -95,6 +95,21 @@
     <!-- content starts -->
     <div class="content mt-5">
       <i onclick="toggleSidebar()" class="fas fa-bars menu"></i>
+
+      <!-- message Box -->
+      <div class="container" th:if="${session.msg}">
+        <div
+          class="alert text-center"
+          role="alert"
+          th:classappend="${'alert-'+session.msg.type}"
+        >
+          <span th:text="${session.msg.content}"></span>
+        </div>
+        <!-- <th:block th:text="${session.removeAttribute('msg')}"></th:block> -->
+
+        <!--  Remove this msg from the session............................................... -->
+      </div>
+
       <div th:replace="${content}"></div>
     </div>
     <!-- content ends -->

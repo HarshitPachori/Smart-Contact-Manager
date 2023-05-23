@@ -23,7 +23,7 @@ public class Contact {
     private String imageUrl;
 
     @Column(length = 1000)
-    private String decription;
+    private String description;
 
     private String phone;
 
@@ -89,12 +89,12 @@ public class Contact {
         this.imageUrl = imageUrl;
     }
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPhone() {
