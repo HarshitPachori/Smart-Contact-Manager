@@ -6,18 +6,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.smartcontactmanager.dao.ContactRepo;
 import com.smartcontactmanager.dao.UserRepo;
 import com.smartcontactmanager.helper.Message;
 import com.smartcontactmanager.models.Contact;
@@ -30,7 +36,10 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
+
+    @Autowired
+    private ContactRepo contactRepo;
 
     // har baar chalega ye methoid or add krdega sabme ye data
     @ModelAttribute
@@ -110,5 +119,25 @@ public class UserController {
 
         }
         return "normal/add_contact_form";
+    }
+
+    // show contacts handler
+    // principal se bhi nikaal sakte hai conatct ki list
+    // per page 5 contacts = 5[n]
+    // current page = 0 [page]
+    // @GetMapping("/show-contacts") // agar pagination nahi chaiye toh ise use karo
+    @GetMapping("/show-contacts/{page}") // use for pagination we use path variable page and use it in below
+    public String showContacts(@PathVariable("page") Integer page, Model model, Principal principal) {
+        model.addAttribute("title", "Show User Contacts");
+        String username = principal.getName(); // email
+        User user = this.userRepo.getUserByUserName(username);
+        // pagination 5 contacts per page
+        // pageable is the parent interface of pagerequest
+        Pageable pageable = PageRequest.of(page, 4);
+        Page<Contact> contacts = this.contactRepo.findContactsByUser(user.getId(), pageable);
+        model.addAttribute("contacts", contacts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", contacts.getTotalPages());
+        return "normal/show_contacts";
     }
 }
