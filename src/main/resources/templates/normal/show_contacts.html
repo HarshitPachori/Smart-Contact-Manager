@@ -34,8 +34,21 @@
             <tbody>
               <tr th:each="c : ${contacts}">
                 <th scope="row" th:text="${'SCM' + c.cid}">1</th>
-                <td th:text="${c.name}">Mark</td>
-                <td th:text="${c.email}">Otto</td>
+                <!-- @ wala static path hai or $ wala dynamic path -->
+                <td>
+                  <img
+                    src=""
+                    class="my-profile-pic"
+                    th:src="@{'/image/' + ${c.imageUrl }}"
+                    alt="profile photo"
+                  />
+                  <span th:text="${c.name}"></span>
+                </td>
+                <td>
+                  <a href="#" th:href="@{'/user/contact/' } + ${c.cid} "
+                    ><span th:text="${c.email}"></span
+                  ></a>
+                </td>
                 <td th:text="${c.phone}">@mdo</td>
                 <td>
                   <button class="btn btn-danger btn-sm">Delete</button>
@@ -63,7 +76,7 @@
                 <a
                   th:href="@{'/user/show-contacts/' +${i-1}}"
                   class="page-link"
-                  th:classappend="${currentPage == i-1 ? 'bg-light text-dark shadow-lg' :'bg-primary text-white'}"
+                  th:classappend="${currentPage == i-1 ? 'bg-primary text-white' : 'bg-light text-dark shadow-lg'} "
                   href="#"
                   ><span th:text="${i}"></span
                 ></a>
